@@ -59,7 +59,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="startCheatingActivity" />
-        />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:text="SEARCH"
+        android:textSize="27sp"
+        app:backgroundTint="@null"
+        android:background="@drawable/button_search_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="search"/>
+
 
 
 </LinearLayout>

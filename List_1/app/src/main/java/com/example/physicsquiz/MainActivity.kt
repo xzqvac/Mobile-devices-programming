@@ -1,6 +1,9 @@
 package com.example.physicsquiz
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.Intent.CATEGORY_BROWSABLE
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,9 +23,12 @@ class MainActivity : AppCompatActivity() {
     private val answerTrue: Button by lazy { findViewById(R.id.btn_true) }
     private val answerFalse: Button by lazy { findViewById(R.id.btn_false) }
     private val answerCheat: Button by lazy { findViewById(R.id.btn_cheat) }
+    private val search: Button by lazy { findViewById(R.id.btn_search) }
 
     private val questionText: TextView by lazy { findViewById(R.id.txt_vw_question) }
     private val cheatAnswerText: TextView by lazy { findViewById(R.id.txt_cheat_answer) }
+
+    private val url = "https://www.google.pl/"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +44,19 @@ class MainActivity : AppCompatActivity() {
 
         setQuestion()
 
+
+
         answerTrue.setOnClickListener {
             val question = questions[currentPosition - 1]
             if (question.correctAnswer == 1) {
                 points += 10
-                correctAnswers
+                correctAnswers++
             }
             currentPosition++
             if (currentPosition <= questions.size)
                 setQuestion()
             else
-                questionText.text = points.toString()
+                showResult()
         }
 
         answerFalse.setOnClickListener {
@@ -61,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             if (currentPosition <= questions.size)
                 setQuestion()
             else
-                questionText.text = points.toString()
+                showResult()
         }
     }
 
@@ -89,6 +97,24 @@ class MainActivity : AppCompatActivity() {
         val question = questions[currentPosition - 1]
         questionText.text = question.question
     }
+
+    @SuppressLint("SetTextI18n")
+    private fun showResult() {
+        questionText.text = "Result: $points\nCorrect: $correctAnswers\nCheated: $amountOfFraud"
+        answerTrue.visibility = View.GONE
+        answerFalse.visibility = View.GONE
+        answerCheat.visibility = View.GONE
+        search.visibility = View.GONE
+    }
+
+    @SuppressLint("QueryPermissionsNeeded")
+    fun search(view: View) {
+        val url = "https://www.google.pl/"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+
+    }
+
 }
 
 
@@ -99,7 +125,14 @@ class Question(
 
 object Questions {
     val questions: List<Question> = listOf(
-        Question("QUESTION 1", 0),
-        Question("QUESTION 2", 0),
-        Question("QUESTION 3", 0))
+        Question("Magnes ma 2 bieguny", 1),
+        Question("Jeden z biegunów to N", 1),
+        Question("Miedź jest izolatorem?", 0) ,
+        Question("Neutrony są elektryczie obojętne", 1),
+        Question("Drewno jest przewodnikiem", 0),
+        Question("Proton ma ładunek dodatni", 1),
+        Question("Elektron ma ładunek ujemny", 1),
+        Question("Rtęć jest metalem", 1),
+        Question("Jednostka napięcia to Volt", 1),
+        Question("Jednostka rezystancji to Amper", 0))
 }
