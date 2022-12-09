@@ -5,14 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".FragmentViewItems">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tasksRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="View items"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"/>
+        android:clipToPadding="false"
+        android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ItemsView"
@@ -20,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@android:drawable/arrow_up_float"
-        android:contentDescription="FAB" />
+        android:contentDescription="FAB"
+        android:src="@android:drawable/arrow_up_float" />
 </FrameLayout>
