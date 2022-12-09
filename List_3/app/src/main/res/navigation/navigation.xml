@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jet_pack_navigation"
+    app:startDestination="@id/fragmentDetailedView">
+
+    <fragment
+        android:id="@+id/fragmentDetailedView"
+        android:name="com.example.studenthardlife.FragmentDetailedView"
+        android:label="fragment_detailed_view"
+        tools:layout="@layout/fragment_detailed_view" >
+        <action
+            android:id="@+id/action_fragmentDetailedView_to_fragmentViewItems2"
+            app:destination="@id/fragmentViewItems" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentViewItems"
+        android:name="com.example.studenthardlife.FragmentViewItems"
+        android:label="fragment_view_items"
+        tools:layout="@layout/fragment_view_items" >
+        <action
+            android:id="@+id/action_fragmentViewItems_to_fragmentDetailedView2"
+            app:destination="@id/fragmentDetailedView" />
+    </fragment>
+</navigation>
