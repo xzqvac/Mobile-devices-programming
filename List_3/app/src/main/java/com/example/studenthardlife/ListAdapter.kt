@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.TasksViewHolder>() {
     private val list = ('A').rangeTo('Z').toList()
 
     class TasksViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val button: Button = view.findViewById(R.id.button_item)
+        val taskTitle: TextView = itemView.findViewById(R.id.taskTitleView)
     }
 
     override fun getItemCount(): Int = list.size
@@ -23,6 +26,15 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.TasksViewHolder>() {
 
     override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
         val item = list[position]
-        holder.button.text = item.toString()
+        holder.taskTitle.text = item.toString()
+        holder.itemView.setOnClickListener {
+            val taskInfo = String.format(
+                "Task",
+            )
+            val action = FragmentViewItemsDirections.actionFragmentViewItemsToFragmentDetailedView2()
+            holder.itemView.findNavController().navigate(action)
+
+
+        }
     }
 }

@@ -14,12 +14,12 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/DetailedView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@android:drawable/arrow_up_float"
-        android:contentDescription="FAB" />
+        android:contentDescription="FAB" />-->
 </FrameLayout>

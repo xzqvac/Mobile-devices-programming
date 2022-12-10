@@ -14,12 +14,12 @@ class FragmentDetailedView : Fragment() {
         container: ViewGroup?,
         saveInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_detailed_view, container, false)
+        return inflater.inflate(R.layout.fragment_detailed_view, container, false)
 
-        view.findViewById<FloatingActionButton>(R.id.DetailedView).setOnClickListener {
-            val action = FragmentDetailedViewDirections.actionFragmentDetailedViewToFragmentViewItems2()
-            Navigation.findNavController(view).navigate(action)
-        }
-        return view
+//        view.findViewById<FloatingActionButton>(R.id.DetailedView).setOnClickListener {
+//            val action = FragmentDetailedViewDirections.actionFragmentDetailedViewToFragmentViewItems2()
+//            Navigation.findNavController(view).navigate(action)
+//        }
+//        return view
     }
 }

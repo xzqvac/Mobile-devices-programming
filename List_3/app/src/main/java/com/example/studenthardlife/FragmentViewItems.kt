@@ -16,13 +16,13 @@ class FragmentViewItems : Fragment() {
         container: ViewGroup?,
         saveInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_view_items, container, false)
+        return inflater.inflate(R.layout.fragment_view_items, container, false)
 
-        view.findViewById<FloatingActionButton>(R.id.ItemsView).setOnClickListener {
-            val action = FragmentViewItemsDirections.actionFragmentViewItemsToFragmentDetailedView2()
-            Navigation.findNavController(view).navigate(action)
-        }
-        return view
+//        view.findViewById<FloatingActionButton>(R.id.ItemsView).setOnClickListener {
+//            val action = FragmentViewItemsDirections.actionFragmentViewItemsToFragmentDetailedView2()
+//            Navigation.findNavController(view).navigate(action)
+//        }
+//        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
