@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".FragmentDetailedView">
+    tools:context=".FragmentViewItems">
 
     <TextView
         android:layout_width="wrap_content"
@@ -83,5 +83,5 @@
                     android:text="CANCEL"
                     android:textStyle="bold" />
 
-    </ LinearLayout>
+    </LinearLayout>
 </LinearLayout>
