@@ -16,12 +16,12 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
         //val taskTitle: TextView = itemView.findViewById(R.id.taskTitleView)
         fun bind(item: Task) {
             itemBinding.textViewName.text = item.name
-            itemBinding.textViewIndex.text = item.index.toString()
+            itemBinding.textViewIndex.text = item.description.toString()
             itemBinding.textViewId.text = item.id.toString()
 
             itemBinding.imageViewDelete.setOnClickListener {
                 dbHandler.deleteTask(item)
-                notifyItemRemoved(adapterPosition)
+                notifyItemRemoved(item.id + 1)
             }
             itemBinding.imageViewEdit.setOnClickListener { setupDialog(item) }
         }
@@ -35,7 +35,7 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
             }
 
             dialogBinding.apply {
-                editTextIndexUpdate.setText(item.index.toString())
+                editTextIndexUpdate.setText(item.description.toString())
                 editTextNameUpdate.setText(item.name)
                 buttonUpdate.setOnClickListener {
                     updateDialog(dialogBinding, item, dialog)
@@ -56,7 +56,7 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
 
             if (updateName.isNotEmpty() && updateIndex.isNotEmpty()) {
                 dbHandler.updateTask(item.id, updateName, updateIndex.toInt())
-                notifyItemChanged(item.id - 1)
+                notifyItemChanged(item.id + 1)
                 dialog.dismiss()
             }
         }

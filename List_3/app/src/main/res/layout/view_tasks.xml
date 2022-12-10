@@ -50,7 +50,8 @@
         android:contentDescription="image"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:scaleType="center"
-        android:src="@drawable/ic_action_edit_foreground" />
+        android:src="@drawable/ic_action_edit_foreground"
+        tools:srcCompat="@android:drawable/btn_dialog" />
 
     <ImageView
         android:id="@+id/image_view_delete"
@@ -59,7 +60,8 @@
         android:contentDescription="image"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:scaleType="center"
-        android:src="@drawable/ic_action_delete_foreground" />
+        android:src="@drawable/ic_action_delete_foreground"
+        tools:srcCompat="@android:drawable/btn_dialog" />
 </LinearLayout>
 <!--
 

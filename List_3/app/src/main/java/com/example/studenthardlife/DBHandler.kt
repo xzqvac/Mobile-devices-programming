@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DBHandler(context: Context) : SQLiteOpenHelper (
     context, DATABASE_NAME, null, DATABASE_VERSION){
-private companion object{
+    companion object{
     private const val DATABASE_VERSION = 1
     private const val DATABASE_NAME = "studentsDBKotlin.db"
     private const val TABLE_TASKS = "TaskTable"
@@ -36,7 +36,7 @@ private companion object{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_NAME, task.name)
-        contentValues.put(COLUMN_INDEX, task.index)
+        contentValues.put(COLUMN_INDEX, task.description)
 
         db.insert(TABLE_TASKS, null, contentValues)
         db.close()
@@ -80,7 +80,7 @@ private companion object{
                 tasks.add(Task(
                     cursor.getInt(0),
                     cursor.getString(1),
-                    cursor.getInt(2)))
+                    cursor.getString(2)))
             } while (cursor.moveToNext())
         }
         db.close()

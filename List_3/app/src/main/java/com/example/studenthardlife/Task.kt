@@ -1,9 +1,9 @@
 package com.example.studenthardlife
 
-data class Task(val name: String, val index: Int) {
+data class Task(val name: String, val description: String) {
     var id: Int = 0
 
-    constructor(id: Int, name: String, index: Int) : this(name, index) {
+    constructor(id: Int, name: String, description: String) : this(name, description) {
         this.id = id
     }
 }
