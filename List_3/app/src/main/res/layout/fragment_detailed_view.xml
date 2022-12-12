@@ -46,21 +46,21 @@
 
     <ImageView
         android:id="@+id/image_view_edit"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:contentDescription="image"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:scaleType="center"
-        android:src="@drawable/ic_action_edit_foreground" />
+        android:src="@drawable/icon_edit" />
 
     <ImageView
         android:id="@+id/image_view_delete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:contentDescription="image"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:scaleType="center"
-        android:src="@drawable/ic_action_delete_foreground" />
+        android:src="@drawable/icon_delete" />
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/DetailedView"

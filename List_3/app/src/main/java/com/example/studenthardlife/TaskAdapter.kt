@@ -2,8 +2,13 @@ package com.example.studenthardlife
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studenthardlife.databinding.DialogBinding
 import com.example.studenthardlife.databinding.ViewTasksBinding
@@ -19,11 +24,11 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
             itemBinding.textViewIndex.text = item.description.toString()
             itemBinding.textViewId.text = item.id.toString()
 
-            itemBinding.imageViewDelete.setOnClickListener {
-                dbHandler.deleteTask(item)
-                notifyItemRemoved(item.id + 1)
-            }
-            itemBinding.imageViewEdit.setOnClickListener { setupDialog(item) }
+//            itemBinding.imageViewDelete.setOnClickListener {
+//                dbHandler.deleteTask(item)
+//                notifyItemRemoved(item.id + 1)
+//            }
+//            itemBinding.imageViewEdit.setOnClickListener { setupDialog(item) }
         }
 
         private fun setupDialog(item: Task) {
@@ -73,8 +78,19 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
         return TasksViewHolder(itemBinding)
     }
     override fun onBindViewHolder(holder: TasksViewHolder, position: Int){
-        val item = dbHandler.getTasks()[position]
-        holder.bind(item)
+        val task = dbHandler.getTasks()[position]
+        holder.bind(task)
+        holder.itemView.setOnClickListener{
+            val taskInfo = String.format(
+                "%s\n%s",
+                task.name,
+                task.description,
+            )
+        val bundle = bundleOf()
+            bundle.putString("Name", task.name)
+            bundle.putString("Description", task.description)
+            holder.itemView.findNavController().navigate(R.id.action_fragmentViewItems_to_fragmentDetailedView7, bundle)
+        }
     }
 }
 

@@ -9,18 +9,15 @@
         android:id="@+id/fragmentDetailedView"
         android:name="com.example.studenthardlife.FragmentDetailedView"
         android:label="fragment_detailed_view"
-        tools:layout="@layout/fragment_detailed_view" >
-        <action
-            android:id="@+id/action_fragmentDetailedView_to_fragmentViewItems2"
-            app:destination="@id/fragmentViewItems" />
-    </fragment>
+        tools:layout="@layout/fragment_detailed_view"/>
     <fragment
         android:id="@+id/fragmentViewItems"
         android:name="com.example.studenthardlife.FragmentViewItems"
         android:label="fragment_view_items"
         tools:layout="@layout/fragment_view_items" >
         <action
-            android:id="@+id/action_fragmentViewItems_to_fragmentDetailedView2"
+            android:id="@+id/action_fragmentViewItems_to_fragmentDetailedView7"
             app:destination="@id/fragmentDetailedView" />
     </fragment>
+
 </navigation>
