@@ -9,7 +9,11 @@
         android:id="@+id/fragmentDetailedView"
         android:name="com.example.studenthardlife.FragmentDetailedView"
         android:label="fragment_detailed_view"
-        tools:layout="@layout/fragment_detailed_view"/>
+        tools:layout="@layout/fragment_detailed_view">
+        <action
+            android:id="@+id/action_fragmentDetailedView_to_fragmentViewItems"
+            app:destination="@id/fragmentViewItems" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentViewItems"
         android:name="com.example.studenthardlife.FragmentViewItems"

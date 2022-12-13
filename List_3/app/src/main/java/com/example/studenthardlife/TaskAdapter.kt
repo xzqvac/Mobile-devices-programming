@@ -24,6 +24,7 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
             itemBinding.textViewIndex.text = item.description.toString()
             itemBinding.textViewId.text = item.id.toString()
 
+
 //            itemBinding.imageViewDelete.setOnClickListener {
 //                dbHandler.deleteTask(item)
 //                notifyItemRemoved(item.id + 1)
@@ -61,7 +62,7 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
 
             if (updateName.isNotEmpty() && updateIndex.isNotEmpty()) {
                 dbHandler.updateTask(item.id, updateName, updateIndex.toInt())
-                notifyItemChanged(item.id + 1)
+                notifyItemChanged(item.id - 1)
                 dialog.dismiss()
             }
         }
@@ -87,6 +88,7 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
                 task.description,
             )
         val bundle = bundleOf()
+            bundle.putInt("ID", task.id)
             bundle.putString("Name", task.name)
             bundle.putString("Description", task.description)
             holder.itemView.findNavController().navigate(R.id.action_fragmentViewItems_to_fragmentDetailedView7, bundle)
