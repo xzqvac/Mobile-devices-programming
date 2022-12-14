@@ -24,41 +24,6 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
             itemBinding.textViewIndex.text = item.description.toString()
             itemBinding.textViewId.text = item.id.toString()
         }
-
-//        private fun setupDialog(item: Task) {
-//            val dialog = Dialog(context)
-//            val dialogBinding = DialogBinding.inflate(LayoutInflater.from(context))
-//            dialog.apply {
-//                setCancelable(false)
-//                setContentView(dialogBinding.root)
-//            }
-//
-//            dialogBinding.apply {
-//                editTextIndexUpdate.setText(item.description.toString())
-//                editTextNameUpdate.setText(item.name)
-//                buttonUpdate.setOnClickListener {
-//                    updateDialog(dialogBinding, item, dialog)
-//                }
-//
-//                buttonCancel.setOnClickListener { dialog.dismiss() }
-//            }
-//            dialog.show()
-//        }
-
-//        private fun updateDialog(
-//            dialogBinding: DialogBinding,
-//            item: Task,
-//            dialog: Dialog
-//        ){
-//            val updateName = dialogBinding.editTextNameUpdate.text.toString()
-//            val updateIndex = dialogBinding.editTextIndexUpdate.text.toString()
-//
-//            if (updateName.isNotEmpty() && updateIndex.isNotEmpty()) {
-//                dbHandler.updateTask(Task(item.id, item.name, item.description))
-//                notifyItemChanged(item.id - 1)
-//                dialog.dismiss()
-//            }
-//        }
     }
 
     override fun getItemCount() = dbHandler.getTasks().size

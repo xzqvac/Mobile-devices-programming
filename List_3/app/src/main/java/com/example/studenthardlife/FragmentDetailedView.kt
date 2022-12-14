@@ -74,10 +74,6 @@ class FragmentDetailedView : Fragment() {
             nameUpdate.setText(name)
             descriptionUpdate.setText(description)
 
-            //nameUpdate.text.toString()
-            //descriptionUpdate.text.toString()
-
-
             buttonEdit.setOnClickListener {
                 dbHandler.updateTask(Task(_id, nameUpdate.toString(), descriptionUpdate.toString()))
                 myDialog.dismiss()
