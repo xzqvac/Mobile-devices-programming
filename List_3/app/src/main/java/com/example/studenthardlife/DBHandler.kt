@@ -66,7 +66,6 @@ class DBHandler(context: Context) : SQLiteOpenHelper (
             null)
 
         db.close()
-
     }
 
     fun getTasks(): List<Task> {

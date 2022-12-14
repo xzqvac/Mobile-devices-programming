@@ -10,32 +10,6 @@
     android:padding="10dp"
     tools:context=".FragmentDetailedView">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/image_view_edit"-->
-    <!--        android:layout_width="32dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:contentDescription="image"-->
-    <!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
-    <!--        android:scaleType="center"-->
-    <!--        android:src="@drawable/icon_edit" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/image_view_delete"-->
-    <!--        android:layout_width="32dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:contentDescription="image"-->
-    <!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
-    <!--        android:scaleType="center"-->
-    <!--        android:src="@drawable/icon_delete" />-->
-    <!--    <TextView-->
-    <!--        android:id="@+id/text_view_index"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_weight="1"-->
-    <!--        android:textColor="@android:color/black"-->
-    <!--        android:textSize="16sp"-->
-    <!--        tools:text="Index" />-->
-
     <TextView
         android:id="@+id/text_view_name"
         android:layout_width="match_parent"
@@ -94,13 +68,4 @@
         tools:layout_conversion_absoluteHeight="40dp"
         tools:layout_conversion_absoluteWidth="126dp" />
 
-
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/DetailedView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:src="@android:drawable/arrow_up_float"
-            android:contentDescription="FAB" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

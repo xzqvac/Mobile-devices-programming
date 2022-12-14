@@ -24,28 +24,24 @@ class FragmentViewItems : Fragment() {
         _binding = FragmentViewItemsBinding.inflate(inflater, container, false)
         return binding.root
         //return inflater.inflate(R.layout.fragment_view_items, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val recyclerView: RecyclerView = view.findViewById(R.id.tasksRecyclerView)
 
         binding.addTaskButton.setOnClickListener {
             val name = binding.editSubjectName.text.toString()
             val description = binding.editTasksDescription.text.toString()
 
             if (name.isNotEmpty() && description.isNotEmpty()){
-                dbHandler.addTask(Task(name,description)
-               )
+                dbHandler.addTask(Task(name,description))
             }
         }
+
         binding.tasksRecyclerView.adapter?.notifyItemInserted(dbHandler.getTasks().size)
         binding.tasksRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = TaskAdapter(dbHandler, context)
-            //recyclerView.layoutManager = LinearLayoutManager(context)
-            //recyclerView.adapter = TaskAdapter(dbHandler, context)
         }
     }
 
