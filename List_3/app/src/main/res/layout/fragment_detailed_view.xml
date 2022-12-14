@@ -1,79 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_layout_detailed_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="10dp"
     tools:context=".FragmentDetailedView">
 
-    <TextView
-        android:id="@+id/text_view_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:padding="10dp"
-        tools:text="1" />
+    <!--    <ImageView-->
+    <!--        android:id="@+id/image_view_edit"-->
+    <!--        android:layout_width="32dp"-->
+    <!--        android:layout_height="32dp"-->
+    <!--        android:contentDescription="image"-->
+    <!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
+    <!--        android:scaleType="center"-->
+    <!--        android:src="@drawable/icon_edit" />-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/image_view_delete"-->
+    <!--        android:layout_width="32dp"-->
+    <!--        android:layout_height="32dp"-->
+    <!--        android:contentDescription="image"-->
+    <!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
+    <!--        android:scaleType="center"-->
+    <!--        android:src="@drawable/icon_delete" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/text_view_index"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:textColor="@android:color/black"-->
+    <!--        android:textSize="16sp"-->
+    <!--        tools:text="Index" />-->
 
     <TextView
         android:id="@+id/text_view_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="10dp"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        tools:text="Name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.315"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/text_view_description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text=":" />
-
-    <TextView
-        android:id="@+id/text_view_index"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        tools:text="Index" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_name"
+        tools:text="Description" />
 
-    <ImageView
-        android:id="@+id/image_view_edit"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:contentDescription="image"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="center"
-        android:src="@drawable/icon_edit" />
-
-    <ImageView
-        android:id="@+id/image_view_delete"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:contentDescription="image"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="center"
-        android:src="@drawable/icon_delete" />
     <Button
         android:id="@+id/delete_task_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_margin="32dp"
-        android:text="Delete"/>
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#FF0000"
+        android:text="Delete"
+        app:icon="@drawable/icon_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:strokeColor="@color/black"
+        tools:layout_conversion_absoluteHeight="40dp"
+        tools:layout_conversion_absoluteWidth="130dp" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/DetailedView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:src="@android:drawable/arrow_up_float"
-        android:contentDescription="FAB" />-->
-</LinearLayout>
+    <Button
+        android:id="@+id/edit_task_button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Edit"
+        app:icon="@drawable/icon_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_conversion_absoluteHeight="40dp"
+        tools:layout_conversion_absoluteWidth="126dp" />
+
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/DetailedView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:src="@android:drawable/arrow_up_float"
+            android:contentDescription="FAB" />-->
+</androidx.constraintlayout.widget.ConstraintLayout>

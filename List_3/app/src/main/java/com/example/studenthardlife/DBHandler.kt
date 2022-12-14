@@ -53,16 +53,16 @@ class DBHandler(context: Context) : SQLiteOpenHelper (
         db.close()
     }
 
-    fun updateTask (id: Int, name: String, index: Int){
+    fun updateTask (task: Task){
         val db = this.writableDatabase
 
         val contentValues = ContentValues()
-        contentValues.put(COLUMN_NAME, name)
-        contentValues.put(COLUMN_INDEX, index)
+        contentValues.put(COLUMN_NAME, task.name)
+        contentValues.put(COLUMN_INDEX, task.description)
 
         db.update(TABLE_TASKS,
             contentValues,
-            "$COLUMN_ID=$id",
+            "$COLUMN_ID=${task.id}",
             null)
 
         db.close()

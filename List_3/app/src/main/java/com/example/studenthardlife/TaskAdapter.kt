@@ -61,7 +61,7 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
             val updateIndex = dialogBinding.editTextIndexUpdate.text.toString()
 
             if (updateName.isNotEmpty() && updateIndex.isNotEmpty()) {
-                dbHandler.updateTask(item.id, updateName, updateIndex.toInt())
+                dbHandler.updateTask(Task(item.id, item.name, item.description))
                 notifyItemChanged(item.id - 1)
                 dialog.dismiss()
             }
