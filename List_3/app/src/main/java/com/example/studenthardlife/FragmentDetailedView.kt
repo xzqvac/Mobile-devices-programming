@@ -75,8 +75,10 @@ class FragmentDetailedView : Fragment() {
             descriptionUpdate.setText(description)
 
             buttonEdit.setOnClickListener {
-                dbHandler.updateTask(Task(_id, nameUpdate.toString(), descriptionUpdate.toString()))
+                dbHandler.updateTask(Task(_id, nameUpdate.editableText.toString(), descriptionUpdate.editableText.toString()))
                 myDialog.dismiss()
+                val action = FragmentDetailedViewDirections.actionFragmentDetailedViewToFragmentViewItems()
+                findNavController().navigate(action)
             }
             buttonCancel.setOnClickListener { myDialog.dismiss()}
 

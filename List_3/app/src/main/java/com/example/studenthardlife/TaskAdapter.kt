@@ -40,11 +40,6 @@ class TaskAdapter(private val dbHandler: DBHandler, private val context: Context
         val task = dbHandler.getTasks()[position]
         holder.bind(task)
         holder.itemView.setOnClickListener{
-            val taskInfo = String.format(
-                "%s\n%s",
-                task.name,
-                task.description,
-            )
         val bundle = bundleOf()
             bundle.putInt("ID", task.id)
             bundle.putString("Name", task.name)
