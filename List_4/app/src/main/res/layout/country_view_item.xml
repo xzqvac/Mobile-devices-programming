@@ -27,7 +27,7 @@
         tools:text=":" />
 
     <TextView
-        android:id="@+id/text_view_index"
+        android:id="@+id/text_view_capital"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
