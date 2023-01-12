@@ -24,34 +24,36 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         findViewById<RecyclerView>(R.id.recyclerView).layoutManager = linearLayoutManager
 
-        getAllData()
+        //getAllData()
     }
-        private fun getAllData() {
-            val retrofitBuilder = Retrofit.Builder()
-                .baseUrl("https://restcountries.com/v3.1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiInterface::class.java)
 
-            val retrofitData = retrofitBuilder.getData()
 
-            retrofitData.enqueue(object : Callback<List<CountryItem>?> {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onResponse(
-                    call: Call<List<CountryItem>?>,
-                    response: Response<List<CountryItem>?>
-                ) {
-                    val responseBody = response.body()!!
-
-                    countryAdapter = CountryAdapter(baseContext, responseBody)
-                    countryAdapter.notifyDataSetChanged()
-                    findViewById<RecyclerView>(R.id.recyclerView).adapter = countryAdapter
-
-                }
-
-                override fun onFailure(call: Call<List<CountryItem>?>, t: Throwable) {
-                    d("MainActivity", "onFailure: " + t.message)
-                }
-            })
-        }
+//        private fun getAllData() {
+//            val retrofitBuilder = Retrofit.Builder()
+//                .baseUrl("https://restcountries.com/v3.1/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//                .create(ApiInterface::class.java)
+//
+//            val retrofitData = retrofitBuilder.getData()
+//
+//            retrofitData.enqueue(object : Callback<List<CountryItem>?> {
+//                @SuppressLint("NotifyDataSetChanged")
+//                override fun onResponse(
+//                    call: Call<List<CountryItem>?>,
+//                    response: Response<List<CountryItem>?>
+//                ) {
+//                    val responseBody = response.body()!!
+//
+//                    countryAdapter = CountryAdapter(baseContext, responseBody)
+//                    countryAdapter.notifyDataSetChanged()
+//                    findViewById<RecyclerView>(R.id.recyclerView).adapter = countryAdapter
+//
+//                }
+//
+//                override fun onFailure(call: Call<List<CountryItem>?>, t: Throwable) {
+//                    d("MainActivity", "onFailure: " + t.message)
+//                }
+//            })
+//        }
 }
