@@ -1,10 +1,13 @@
 package com.example.restcountriesapp
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.restcountriesapp.data.CountryItem
+import com.example.restcountriesapp.retrofit.ApiInterface
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             val retrofitData = retrofitBuilder.getData()
 
             retrofitData.enqueue(object : Callback<List<CountryItem>?> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
                     call: Call<List<CountryItem>?>,
                     response: Response<List<CountryItem>?>

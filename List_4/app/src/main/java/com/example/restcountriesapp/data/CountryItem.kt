@@ -1,6 +1,8 @@
-package com.example.restcountriesapp
+package com.example.restcountriesapp.data
 
 
+import com.example.restcountriesapp.data.Flags
+import com.example.restcountriesapp.data.Name
 import com.google.gson.annotations.SerializedName
 
 data class CountryItem(
