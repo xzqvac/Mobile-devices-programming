@@ -28,10 +28,9 @@ class CountryAdapter(activity: Activity) : RecyclerView.Adapter<CountryAdapter.C
             if(data.capital.isNullOrEmpty())
                 capital.text = "No capital"
             else{
-                val capitals = buildString { data.capital.forEach { append("$it ")} }
+                val capitals = buildString { data.capital.forEach { append("$it\n")} }
                 capital.text = capitals
             }
-
         }
     }
 
