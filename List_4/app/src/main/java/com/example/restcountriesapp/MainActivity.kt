@@ -3,57 +3,48 @@ package com.example.restcountriesapp
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log.d
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.restcountriesapp.data.CountryItem
-import com.example.restcountriesapp.retrofit.ApiInterface
-import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.restcountriesapp.adapter.CountryAdapter
+import com.example.restcountriesapp.viewModel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var countryAdapter: CountryAdapter
-    lateinit var  linearLayoutManager: LinearLayoutManager
+    lateinit var recyclerAdapter: CountryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<RecyclerView>(R.id.recyclerView).setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(this)
-        findViewById<RecyclerView>(R.id.recyclerView).layoutManager = linearLayoutManager
-
-        //getAllData()
+        initRecyclerView()
+        initViewModel()
     }
 
+    @SuppressLint("CutPasteId")
+    private fun initRecyclerView(){
 
-//        private fun getAllData() {
-//            val retrofitBuilder = Retrofit.Builder()
-//                .baseUrl("https://restcountries.com/v3.1/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build()
-//                .create(ApiInterface::class.java)
-//
-//            val retrofitData = retrofitBuilder.getData()
-//
-//            retrofitData.enqueue(object : Callback<List<CountryItem>?> {
-//                @SuppressLint("NotifyDataSetChanged")
-//                override fun onResponse(
-//                    call: Call<List<CountryItem>?>,
-//                    response: Response<List<CountryItem>?>
-//                ) {
-//                    val responseBody = response.body()!!
-//
-//                    countryAdapter = CountryAdapter(baseContext, responseBody)
-//                    countryAdapter.notifyDataSetChanged()
-//                    findViewById<RecyclerView>(R.id.recyclerView).adapter = countryAdapter
-//
-//                }
-//
-//                override fun onFailure(call: Call<List<CountryItem>?>, t: Throwable) {
-//                    d("MainActivity", "onFailure: " + t.message)
-//                }
-//            })
-//        }
+        findViewById<RecyclerView>(R.id.recyclerView).layoutManager = LinearLayoutManager(this)
+        recyclerAdapter = CountryAdapter(this)
+        findViewById<RecyclerView>(R.id.recyclerView).setHasFixedSize(true)
+        findViewById<RecyclerView>(R.id.recyclerView).adapter = recyclerAdapter
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initViewModel() {
+        val viewModel:MainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        viewModel.getLiveDataObserver().observe(this, Observer {
+            if(it != null) {
+                recyclerAdapter.setCountryList(it)
+                recyclerAdapter.notifyDataSetChanged()
+            }
+            else{
+                Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
+            }
+        })
+        viewModel.doApiCall()
+    }
 }
