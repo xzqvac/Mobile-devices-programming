@@ -40,7 +40,7 @@ class FragmentHome: Fragment() {
         viewModel.doApiCall()
         viewModel.getLiveDataObserver().observe(viewLifecycleOwner, Observer {
             if (it != null){
-                recyclerView.adapter = CountryAdapter(it)
+                recyclerView.adapter = CountryAdapter(it, showFlags = false)
             }
         })
     }
