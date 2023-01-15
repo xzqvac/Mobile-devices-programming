@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetroInstance {
     companion object {
-        val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder()
+        private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        private val client = OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .build()
         fun createRetroInstance(): Retrofit {

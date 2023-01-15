@@ -11,12 +11,9 @@ import javax.security.auth.callback.Callback
 
 class MainActivityViewModel: ViewModel() {
 
-    lateinit var liveDataList: MutableLiveData<List<CountryItem>>
-    init {
-        liveDataList = MutableLiveData()
-    }
+    var liveDataList: MutableLiveData<List<CountryItem>?> = MutableLiveData()
 
-    fun getLiveDataObserver(): MutableLiveData<List<CountryItem>> {
+    fun getLiveDataObserver(): MutableLiveData<List<CountryItem>?> {
         return liveDataList
     }
 
@@ -31,6 +28,7 @@ class MainActivityViewModel: ViewModel() {
                 response: Response<List<CountryItem>>
             ) {
                 liveDataList.postValue(response.body())
+                liveDataList.value?.let { println(it.size) }
             }
 
             override fun onFailure(call: Call<List<CountryItem>>, t: Throwable) {

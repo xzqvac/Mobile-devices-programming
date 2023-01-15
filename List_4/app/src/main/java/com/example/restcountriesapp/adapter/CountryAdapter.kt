@@ -1,7 +1,6 @@
 package com.example.restcountriesapp.adapter
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restcountriesapp.R
 import com.example.restcountriesapp.data.CountryItem
 
-class CountryAdapter(activity: Activity) : RecyclerView.Adapter<CountryAdapter.CountryListViewHolder>() {
+class CountryAdapter(private val countryList: List<CountryItem>?) : RecyclerView.Adapter<CountryAdapter.CountryListViewHolder>() {
 
-    private var countryList: List<CountryItem>? = null
+    //private var countryList: List<CountryItem>? = null
 
-    fun setCountryList(countryList: List<CountryItem>?) {
-        this.countryList = countryList
-    }
+//    fun setCountryList(countryList: List<CountryItem>?) {
+//        this.countryList = countryList
+//    }
 
     class CountryListViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var countryName: TextView = view.findViewById(R.id.text_view_name)

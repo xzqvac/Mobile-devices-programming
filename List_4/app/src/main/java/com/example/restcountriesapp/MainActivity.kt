@@ -6,45 +6,30 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restcountriesapp.adapter.CountryAdapter
 import com.example.restcountriesapp.viewModel.MainActivityViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var recyclerAdapter: CountryAdapter
+    private val navController: NavController by lazy {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                as NavHostFragment
+        navHostFragment.findNavController()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initRecyclerView()
-        initViewModel()
-    }
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        bottomNav?.setupWithNavController(navController)
 
-    @SuppressLint("CutPasteId")
-    private fun initRecyclerView(){
-
-        findViewById<RecyclerView>(R.id.recyclerView).layoutManager = LinearLayoutManager(this)
-        recyclerAdapter = CountryAdapter(this)
-        findViewById<RecyclerView>(R.id.recyclerView).setHasFixedSize(true)
-        findViewById<RecyclerView>(R.id.recyclerView).adapter = recyclerAdapter
-
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun initViewModel() {
-        val viewModel:MainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        viewModel.getLiveDataObserver().observe(this, Observer {
-            if(it != null) {
-                recyclerAdapter.setCountryList(it)
-                recyclerAdapter.notifyDataSetChanged()
-            }
-            else{
-                Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
-            }
-        })
-        viewModel.doApiCall()
     }
 }
