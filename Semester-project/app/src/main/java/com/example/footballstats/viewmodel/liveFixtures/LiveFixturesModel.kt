@@ -20,14 +20,14 @@ class LiveFixturesModel @Inject constructor(private val fixturesRepository: Fixt
     ViewModel() {
 
     private val _liveFixturesState = MutableStateFlow<FixturesState>(FixturesState.Empty)
-    private val liveFixturesState: StateFlow<FixturesState> = _liveFixturesState.stateIn(
+    val liveFixturesState: StateFlow<FixturesState> = _liveFixturesState.stateIn(
         initialValue = FixturesState.Empty,
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000)
     )
 
     private val _futureFixturesState = MutableStateFlow<FixturesState>(FixturesState.Empty)
-    private val futureFixturesState: StateFlow<FixturesState> = _futureFixturesState.stateIn(
+    val futureFixturesState: StateFlow<FixturesState> = _futureFixturesState.stateIn(
         initialValue = FixturesState.Empty,
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000)
