@@ -1,4 +1,4 @@
-package com.example.footballstats.viewmodel
+package com.example.footballstats.viewmodel.state
 
 import com.example.footballstats.data.remote.models.Data
 
