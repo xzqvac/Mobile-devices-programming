@@ -60,7 +60,7 @@ fun LiveFixtures(liveFixtures: List<Data>) {
         }
         else {
             LazyRow(
-                modifier = Modifier.padding(15.dp),
+                modifier = Modifier.padding(top = 15.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(liveFixtures.size) {
@@ -71,6 +71,7 @@ fun LiveFixtures(liveFixtures: List<Data>) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LiveFixtureItem(match: Data) {
     Card(
@@ -110,7 +111,36 @@ fun LiveFixtureItem(match: Data) {
                     style = MaterialTheme.typography.h6
                 )
             }
+            Chip(
+                onClick = { /*TODO*/ },
+                colors = ChipDefaults.chipColors(
+                    contentColor = Color.White,
+                    backgroundColor = Green900
+                ),
+                modifier = Modifier
+                    .align(
+                        Alignment.CenterHorizontally
+                    )
+                    .padding(top = 20.dp)
+            ) {
+                Text(matchStatus(match))
+            }
         }
+    }
+}
+
+fun matchStatus(match: Data): String {
+    return when (match.statusCode) {
+        1 -> "${match.minute} '"
+        11 -> "half time"
+        0 -> "not started"
+        3 -> "finished"
+        5 -> "cancelled"
+        4 -> "postponed"
+        17 -> "to be announced"
+        12 -> "extra time"
+        13 -> "penalties"
+        else -> "-"
     }
 }
 
