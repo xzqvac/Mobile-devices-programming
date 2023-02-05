@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface APIService {
 
     @GET(GET_FIXTURES)
-    suspend fun getFixtures(
+    suspend fun getFutureFixtures(
         @Query("apikey") apiKey: String = API_KEY,
         @Query("season_id") seasondId: Int = SEASON_ID
     ) : FixturesResponse
