@@ -7,5 +7,5 @@ import javax.inject.Inject
 class FixturesRepository @Inject constructor(private val sportDataAPIService: APIService){
     suspend fun getLiveFixtures(): List<Data> = sportDataAPIService.getLiveFixtures().data
 
-    suspend fun getFixtures(): List<Data> = sportDataAPIService.getFixtures().data
+    suspend fun getFutureFixtures(): List<Data> = sportDataAPIService.getFixtures().data
 }
