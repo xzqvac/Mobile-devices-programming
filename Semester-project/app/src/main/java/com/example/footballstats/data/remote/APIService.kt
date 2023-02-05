@@ -14,4 +14,10 @@ interface APIService {
         @Query("apikey") apiKey: String = API_KEY,
         @Query("season_id") seasondId: Int = SEASON_ID
     ) : FixturesResponse
+
+    @GET(GET_FIXTURES)
+    suspend fun getLiveFixtures(
+        @Query("apikey") apiKey: String = API_KEY,
+        @Query("live") seasondId: Boolean = true
+    ) : FixturesResponse
 }
