@@ -299,7 +299,7 @@ fun getMatchTime(date: String): String? {
 }
 
 @Composable
-fun TopAppBar(fixturesModel: FixturesModel) {
+fun TopAppBar(fixturesModel: FixturesModel = viewModel()) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
