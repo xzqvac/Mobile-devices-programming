@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.breens.mvvmlivescorestarter.ui.theme.Green900
 import com.example.footballstats.data.remote.models.Data
+import com.example.footballstats.database.FixturesViewModel
 import com.example.footballstats.theme.footballStatsTheme
 import com.example.footballstats.theme.imageLoader
 import com.example.footballstats.viewmodel.Fixtures.FixturesModel
@@ -298,13 +299,16 @@ fun getMatchTime(date: String): String? {
 }
 
 @Composable
-fun TopAppBar() {
+fun TopAppBar(fixturesModel: FixturesModel) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = {
+            fixturesModel.getFutureFixtures()
+            fixturesModel.getLiveFixtures()
+        }) {
             Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh Icon")
         }
 
