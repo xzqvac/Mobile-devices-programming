@@ -1,4 +1,4 @@
-package com.example.footballstats.viewmodel.liveFixtures
+package com.example.footballstats.viewmodel.Fixtures
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class LiveFixturesModel @Inject constructor(private val fixturesRepository: FixturesRepository) :
+class FixturesModel @Inject constructor(private val fixturesRepository: FixturesRepository) :
     ViewModel() {
 
     private val _liveFixturesState = MutableStateFlow<FixturesState>(FixturesState.Empty)
