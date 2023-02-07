@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -16,14 +17,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.breens.mvvmlivescorestarter.ui.theme.Green900
 import com.example.footballstats.data.remote.models.Data
 import com.example.footballstats.theme.footballStatsTheme
-import com.example.footballstats.viewmodel.liveFixtures.LiveFixturesModel
+import com.example.footballstats.viewmodel.Fixtures.FixturesModel
 import com.example.footballstats.viewmodel.state.FixturesState
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -145,15 +149,130 @@ fun matchStatus(match: Data): String {
 }
 
 @Composable
-fun FetchData(liveFixturesModel: LiveFixturesModel = viewModel()) {
+fun FetchData(matchesViewModel: FixturesModel = viewModel()) {
+
+    val futureMatchesState = matchesViewModel.futureFixturesState.collectAsState()
+
+    val liveMatchesState = matchesViewModel.liveFixturesState.collectAsState()
+
     Column {
-        when (val state = liveFixturesModel.liveFixturesState.collectAsState().value) {
+        when (val state = liveMatchesState.value) {
             is FixturesState.Empty -> Text(text = "No data avaliabe")
             is FixturesState.Loading -> Text(text = "Loading data")
             is FixturesState.Success -> LiveFixtures(liveFixtures = state.data)
             is FixturesState.Error -> Text(text = state.message)
         }
+        when (val state = futureMatchesState.value) {
+
+            is FixturesState.Empty -> Text(text = "No data available")
+            is FixturesState.Loading -> Text(text = "Loading...")
+            is FixturesState.Success -> FutureFixtures(upcomingMatches = state.data)
+            is FixturesState.Error -> Text(text = state.message)
+        }
     }
+}
+
+@Composable
+fun FutureFixtures(upcomingMatches: List<Data>) {
+
+    Column(modifier = Modifier.padding(15.dp)) {
+
+        Text(
+            text = "Scheduled Matches",
+            style = MaterialTheme.typography.h3,
+            modifier = Modifier.padding(top = 12.dp)
+        )
+
+        val notStartedUpcomingMatches =
+            upcomingMatches.filter { it.statusCode == 1 || it.statusCode == 17 }
+        if (notStartedUpcomingMatches.isEmpty()) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = "No Upcoming Matches Currently"
+                )
+                Text(
+                    text = "No Upcoming Matches Currently",
+                    style = MaterialTheme.typography.h6
+                )
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.padding(top = 15.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(upcomingMatches.size) {
+                    FutureFixtureItem(match = notStartedUpcomingMatches[it])
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun FutureFixtureItem(match: Data) {
+    Card(
+        shape = RoundedCornerShape(24.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .padding(bottom = 10.dp),
+        elevation = 0.dp
+    ) {
+        val month = getMatchDayAndMonth(match.matchStart)
+        val time = getMatchTime(match.matchStart)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Column(
+                modifier = Modifier.weight(0.5f),
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = match.homeTeam.name,
+                    style = MaterialTheme.typography.h6,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            Text(
+                modifier = Modifier.weight(0.5f),
+                text = "$time\n$month",
+                style = MaterialTheme.typography.h6,
+                color = Green900,
+                textAlign = TextAlign.Center
+            )
+
+            Column(
+                modifier = Modifier.weight(0.5f),
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                }
+                Text(
+                    text = match.awayTeam.name,
+                    style = MaterialTheme.typography.h6,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+
+
+fun getMatchDayAndMonth(date: String): String? {
+    val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+    val formatter = SimpleDateFormat("d MMM", Locale.ENGLISH)
+    return date.let { it -> parser.parse(it)?.let { formatter.format(it) } }
+}
+
+fun getMatchTime(date: String): String? {
+    val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
+    val formatter = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
+    return date.let { it -> parser.parse(it)?.let { formatter.format(it) } }
 }
 
 @Composable
