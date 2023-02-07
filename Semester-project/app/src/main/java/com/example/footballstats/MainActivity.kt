@@ -1,8 +1,10 @@
 package com.example.footballstats
 
+import android.media.Image
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -17,12 +19,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.breens.mvvmlivescorestarter.ui.theme.Green900
 import com.example.footballstats.data.remote.models.Data
 import com.example.footballstats.theme.footballStatsTheme
+import com.example.footballstats.theme.imageLoader
 import com.example.footballstats.viewmodel.Fixtures.FixturesModel
 import com.example.footballstats.viewmodel.state.FixturesState
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,8 +67,7 @@ fun LiveFixtures(liveFixtures: List<Data>) {
                     style = MaterialTheme.typography.h6
                 )
             }
-        }
-        else {
+        } else {
             LazyRow(
                 modifier = Modifier.padding(top = 15.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -221,6 +226,8 @@ fun FutureFixtureItem(match: Data) {
     ) {
         val month = getMatchDayAndMonth(match.matchStart)
         val time = getMatchTime(match.matchStart)
+        val homeTeamLogo = imageLoader(url = match.homeTeam.logo).value
+        val awayTeamLogo = imageLoader(url = match.awayTeam.logo).value
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -232,6 +239,14 @@ fun FutureFixtureItem(match: Data) {
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                homeTeamLogo?.let {
+                    Image(
+                        modifier = Modifier.size(30.dp),
+                        bitmap = homeTeamLogo.asImageBitmap(),
+                        contentDescription = "Home Team Logo",
+                        contentScale = ContentScale.Crop
+                    )
+                }
                 Text(
                     text = match.homeTeam.name,
                     style = MaterialTheme.typography.h6,
@@ -252,6 +267,12 @@ fun FutureFixtureItem(match: Data) {
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                awayTeamLogo?.let{
+                    Image(
+                        modifier = Modifier.size(30.dp),
+                        bitmap = awayTeamLogo.asImageBitmap(),
+                        contentDescription = "Away Team Logo",
+                        contentScale = ContentScale.Crop)
                 }
                 Text(
                     text = match.awayTeam.name,
@@ -261,6 +282,7 @@ fun FutureFixtureItem(match: Data) {
             }
         }
     }
+}
 
 
 fun getMatchDayAndMonth(date: String): String? {
